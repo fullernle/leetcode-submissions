@@ -24,16 +24,29 @@ Example 1:
  * @param {number} targetSum
  * @return {boolean}
  */
-var hasPathSum = function(root, targetSum) {
-    return dfs(root, 0, targetSum);
+var hasPathSum = function (root, targetSum) {
+  return dfs(root, 0, targetSum);
 };
-
 
 const dfs = (node, curSum, targetSum) => {
   if (node === null) return false;
 
   curSum += node.val;
   if (node.left === null && node.right === null) return curSum === targetSum;
-  
-  return dfs(node.left, curSum, targetSum) || dfs(node.right, curSum, targetSum);
+
+  return (
+    dfs(node.left, curSum, targetSum) || dfs(node.right, curSum, targetSum)
+  );
+};
+
+// No Helper method, subtracts from target sum as you recursively call
+var hasPathSum = function (root, targetSum) {
+  if (node === null) return false;
+
+  const currentSum = targetSum - root.val;
+  if (node.left === null && node.right === null) return currentSum === 0;
+
+  return (
+    hasPathSum(root.left, currentSum) || hasPathSum(root.right, currentSum)
+  );
 };
