@@ -14,3 +14,15 @@ var singleNumber = function(nums) {
 		if (count === 1) return Number(key);
 	}
 };
+
+// Constant Space solution using XOR bit manipulation 
+
+var singleNumber = function(nums) {
+	let result = 0; 
+
+	for (let num of nums) {
+		result ^= num;
+	}
+
+	return result;
+}
